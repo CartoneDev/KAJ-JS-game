@@ -1,5 +1,6 @@
 var rush = rush || {};
 
+
 function resetGame() {
   this.camera.removeAllChildren();
   this.camera.x = 0;
@@ -181,22 +182,22 @@ function heroHitsPlatform(point) {
 function heroHitsCoin(point, coin) {
   var DissCoin = new rush.DissCoin();
 
-  // Установка позиции DissCoin на позицию coin
+
   DissCoin.x = coin.x;
   DissCoin.y = coin.y;
 
-  // Удаление монетки и добавление DissCoin
+
   this.camera.removeChild(coin);
   this.camera.addChild(DissCoin);
   createjs.Sound.play("coinSound");
-  console.log("DissCoin added at:", DissCoin.x, DissCoin.y); // Лог для отладки
+  console.log("DissCoin added at:", DissCoin.x, DissCoin.y);
 
   this.animation.on("animationend", function() {
-    console.log("Animation ended"); // Лог для отладки
+    console.log("Animation ended");
     this.camera.removeChild(this);
   }.bind(this));
 
-  // Увеличение счётчика собранных монеток
+
   this.collectedCoins++;
 }
 
@@ -259,6 +260,6 @@ function createRushGame() {
   p.resolveCollision = resolveCollision;
 
   return RushGame;
-} 
+}
 
 rush.Game = createRushGame();

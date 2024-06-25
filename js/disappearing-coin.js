@@ -37,7 +37,7 @@ rush.DissCoin = (function() {
 
         // Listen for the animation end
         this.animation.on("animationend", function() {
-            console.log("Animation ended"); // Лог для отладки
+            console.log("Animation ended");
             if (this.parent) {
                 this.parent.removeChild(this);
             }

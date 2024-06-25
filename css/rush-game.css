@@ -14,6 +14,8 @@ header {
   margin: 2em auto;
   background: url(../images/rush-header.png) center center no-repeat;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 header h1 {
@@ -23,6 +25,7 @@ header h1 {
 
 #game {
   position: relative;
+  z-index: 1;
   width: 480px;
   height: 320px;
   margin: auto;
@@ -99,10 +102,35 @@ header h1 {
   float:left;
 }
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 ul.how-to-play, #top-scores-board ul {
   list-style-image: url(../images/coin1.png);
   list-style-position: inside;
   padding: 0;
+}
+
+ul.how-to-play li::before, #top-scores-board ul li::before {
+  content: '';
+  display: inline-block;
+  width: 12px; /* Ширина изображения монеты */
+  height: 12px; /* Высота изображения монеты */
+  background-image: url(../images/coin1.png);
+  background-size: cover;
+  margin-right: 8px; /* Отступ между монетой и текстом */
+  animation: spin 2s linear infinite; /* Применение анимации */
+}
+
+ul.how-to-play li, #top-scores-board ul li {
+  padding-left: 40px; /* Отступ слева для отображения монеты */
+  position: relative;
+}
+
+ul.how-to-play li::marker, #top-scores-board ul li::marker {
+  content: none; /* Убираем стандартные маркеры списка */
 }
 
 .hr {
@@ -132,4 +160,87 @@ footer a {
 
 footer a:hover {
   color: #000;
+}
+
+.cloud {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  fill: #ffffff; /* Цвет заливки облака */
+}
+
+/* Контейнер для фона */
+#background-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* Стили SVG контейнера */
+#background-container svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 2px solid #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.popup h2 {
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    width: 100%;
+    background-size: cover;
+  }
+
+  .scene {
+    width: 100%;
+    height: 240px;
+  }
+
+  .row {
+    width: 100%;
+  }
+
+  .half {
+    width: 100%;
+    float: none;
+  }
+}
+
+
+
+
+@media screen and (min-width: 1200px) {
+  #background-container {
+    background-size: contain;
+  }
+}
+
+
+@media screen and (orientation: landscape) {
+  header {
+    height: 80px;
+  }
 }

@@ -20,6 +20,7 @@ function startGame() {
     document.getElementById('start-btn').onclick = startButtonClicked;
     document.getElementById('restart-btn').onclick = restartButtonClicked;
     document.getElementById('top-scores-board').innerHTML = (new rush.TopScores()).toHTML();
+
 }
 
 window.onload = startGame;
