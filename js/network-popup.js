@@ -1,6 +1,6 @@
 function showNetworkErrorPopup() {
     var popup = document.createElement('div');
-    popup.textContent = 'Отключено от сети';
+    popup.textContent = 'Disconnected from the network.';
     popup.style.position = 'fixed';
     popup.style.top = '50%';
     popup.style.left = '50%';

@@ -32,7 +32,6 @@ function loadGraphics() {
   for (var i = 0, len = totalFiles; i < len; i++) {
     imageToLoad = imagesList[i];
     var img = new Image();
-    // make sure we have onload event declaring before setting the src property.
     img.onload = imageOnload.bind(this);
 
     console.log ("loading: ", imageToLoad.path);
@@ -45,14 +44,14 @@ function loadGraphics() {
 function loadSounds(callback) {
   rush.sounds = {};
 
-  // Загрузка звуков с помощью SoundJS
+
   createjs.Sound.registerSound("sounds/jump.mp3", "jumpSound");
   createjs.Sound.registerSound("sounds/coin-collect.mp3", "coinSound");
   createjs.Sound.registerSound("sounds/background.mp3", "backgroundMusic");
   createjs.Sound.registerSound("sounds/game-over.mp3", "gameoverSound");
 
-  // Проверка загрузки всех звуков
-  var numSounds = 4; // Количество звуков для загрузки
+
+  var numSounds = 4;
   var loadedSounds = 0;
 
   function soundLoaded(event) {
@@ -60,7 +59,7 @@ function loadSounds(callback) {
     console.log('loaded sound:', event.id, loadedSounds, '/', numSounds);
 
     if (loadedSounds >= numSounds && typeof callback === 'function') {
-      callback(); // Убедитесь, что callback является функцией перед вызовом
+      callback();
     }
   }
 
@@ -102,13 +101,12 @@ function createPreloader() {
   Preloader.prototype.loadGraphics = function() {
     var self = this;
 
-    // Сначала загрузить графику
+
     loadGraphics.call(this);
 
-    // Затем загрузить звуки и перейти к следующему этапу, когда звуки будут загружены
+
     loadSounds(function() {
       self.game.backgroundMusicInstance = createjs.Sound.play("backgroundMusic", { loop: -1, volume: 0.2 });
-      // Callback функция после загрузки звуков
       self.game.stage.removeChild(self);
       var menuScene = document.getElementById('menu');
       menuScene.classList.remove('hidden');
